@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Haknim — Crypto Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background grid -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <header>
+    <div class="header-left">
+      <div class="logo">HAKNIM</div>
+      <div class="logo-sub">CRYPTO MARKETS</div>
+    </div>
+    <div class="header-center">
+      <div class="market-ticker" id="marketTicker">
+        <span class="ticker-label">MARKET CAP</span>
+        <span class="ticker-value" id="totalMarketCap">—</span>
+        <span class="ticker-divider">|</span>
+        <span class="ticker-label">24H VOL</span>
+        <span class="ticker-value" id="totalVolume">—</span>
+        <span class="ticker-divider">|</span>
+        <span class="ticker-label">BTC DOM</span>
+        <span class="ticker-value" id="btcDominance">—</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="last-updated" id="lastUpdated">Fetching data...</div>
+      <div class="refresh-ring" id="refreshRing"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Search & Filter Bar -->
+    <div class="controls-bar">
+      <div class="search-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search coins..." />
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-sort="market_cap">Market Cap</button>
+        <button class="filter-tab" data-sort="price_change">24h Change</button>
+        <button class="filter-tab" data-sort="volume">Volume</button>
+        <button class="filter-tab" data-sort="price">Price</button>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="viewGrid" title="Grid view">⊞</button>
+        <button class="view-btn" id="viewList" title="List view">☰</button>
+      </div>
+    </div>
+
+    <!-- Top 3 Hero Cards -->
+    <div class="hero-section">
+      <div class="hero-label">TOP PERFORMERS</div>
+      <div class="hero-cards" id="heroCards">
+        <div class="hero-card skeleton"></div>
+        <div class="hero-card skeleton"></div>
+        <div class="hero-card skeleton"></div>
+      </div>
+    </div>
+
+    <!-- Main Coin Grid -->
+    <div class="section-header">
+      <div class="section-title">LIVE MARKETS</div>
+      <div class="coin-count" id="coinCount">Loading...</div>
+    </div>
+
+    <div class="coins-grid" id="coinsGrid">
+      <!-- Skeleton loaders -->
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+      <div class="coin-card skeleton"></div>
+    </div>
+
+    <!-- Watchlist -->
+    <div class="watchlist-section" id="watchlistSection">
+      <div class="section-header">
+        <div class="section-title">WATCHLIST</div>
+        <button class="clear-btn" id="clearWatchlist">Clear All</button>
+      </div>
+      <div class="watchlist-grid" id="watchlistGrid">
+        <div class="watchlist-empty">Click the ★ on any coin to add it here</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Coin Detail Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="coinModal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-header">
+        <img class="modal-icon" id="modalIcon" src="" alt="" />
+        <div>
+          <div class="modal-name" id="modalName"></div>
+          <div class="modal-symbol" id="modalSymbol"></div>
+        </div>
+        <div class="modal-price-block">
+          <div class="modal-price" id="modalPrice"></div>
+          <div class="modal-change" id="modalChange"></div>
+        </div>
+      </div>
+      <div class="modal-stats" id="modalStats"></div>
+      <div class="modal-chart-label">PRICE TREND (7 DAYS)</div>
+      <canvas class="modal-chart" id="modalChart" width="600" height="160"></canvas>
+    </div>
+  </div>
+
+  <footer>
+    <span>Haknim · Data by CoinGecko API · No API key required</span>
+    <span>Ahmad Project · Updates every 60s</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
